@@ -13,33 +13,19 @@ services:
       - "1443:443"
     expose:
       - 1443 
-    environment:
-        DbServer: "sqlserver"
-        DbPort: "1433"
-        DbUser: "SA"
-        Password: "TechChallenge#Fase02"
-        Database: "Lanchonete"
     depends_on:
-      - sqlserver
+      - mongodb
 
-  sqlserver:
-    image: "mcr.microsoft.com/mssql/server:2022-latest"
-    container_name: sqlserver
-    hostname: 'sqlserver'
-    environment:
-      ACCEPT_EULA: 'Y'
-      SA_PASSWORD: "TechChallenge#Fase02"
-      MSSQL_PID: Express
-    volumes:
-      - c:/dados/volumes/mssql/data:/var/opt/mssql/data
-      - c:/dados/volumes/mssql/log:/var/opt/mssql/log
-      - c:/dados/volumes/mssql/secrets:/var/opt/mssql/secrets
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    hostname: 'mongodb'
     networks:
       - techchallenge-bridge
     ports:
-      - "11433:1433"
+      - "27017:27017"
     expose:
-      - 1433
+      - 27017
 
 networks:
   techchallenge-bridge:

@@ -1,11 +1,22 @@
-﻿namespace TechChallenge.src.Core.Domain.Entities
+﻿namespace Domain.Entities
 {
     public class ItemPedido : EntidadeBase<Guid>
     {
-        public Guid PedidoId { get; private set; }
-        public Guid ProdutoId { get; private set; }
-        public decimal Quantidade { get; private set; }
-        public Produto Produto { get; private set; } = new Produto();
-        public Pedido? Pedido { get; private set; }
+        public string? NomeProduto { get; private set; }
+        public string? DescricaoProduto { get; private set; }
+        public string? UnidadeDeMedida => "unit";
+        public decimal Valor { get; private set; }
+        public int Quantidade { get; private set; }
+        public decimal ValorTotal => Valor * Quantidade;
+
+        public ItemPedido NewInstance(string nomeProduto, string descricaoProduto, decimal valor, int quantidade)
+        {
+            NomeProduto = nomeProduto;
+            DescricaoProduto = descricaoProduto;
+            Valor = valor;
+            Quantidade = quantidade;
+
+            return this;
+        }
     }
 }

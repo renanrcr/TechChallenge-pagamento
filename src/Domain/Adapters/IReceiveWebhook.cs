@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace TechChallenge.src.Core.Domain.Adapters
+namespace Domain.Adapters
 {
     public interface IReceiveWebhook
     {
